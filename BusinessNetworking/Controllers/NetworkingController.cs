@@ -1,3 +1,5 @@
+using BusinessNetworking.Entities;
+using BusinessNetworking.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessNetworking.Controllers
@@ -6,19 +8,19 @@ namespace BusinessNetworking.Controllers
     [Route("[controller]")]
     public class NetworkingController : ControllerBase
     {        
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public NetworkingController(UserService userService)
+        public NetworkingController(IUserService userService)
         {            
             _userService = userService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserModel model)
+        public async Task<IActionResult> Register(User user)
         {
             try
             {
-                var registeredUser = await _userService.RegisterUser(model);
+                var registeredUser = await _userService.RegisterUser(user);
                 return Ok(registeredUser);
             }
             catch (Exception ex)
