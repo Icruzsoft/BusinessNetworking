@@ -16,6 +16,10 @@ namespace BusinessNetworking.Services
     {
         Task<int> RegisterUser(User user);
         Task<string> AuthenticateUser(string email, string password);
+        Task<User> GetUserByTypeId(int TypeId);
+        Task<User> GetUserByUserId(int UserId);
+        Task<User> GetUserByUserIdAndTypeId(int UserId, int TypeId);
+        Task<ExpertUser> GetExpertByUserId(int UserId);
     }
 
     public class UserService : IUserService
@@ -59,6 +63,44 @@ namespace BusinessNetworking.Services
             using (var connection = new SqlConnection(_connectionString))
             {
                 return await connection.QuerySingleOrDefaultAsync<User>(sql, new { Email = email });
+            }
+        }
+
+        public async Task<User> GetUserByUserId(int UserId)
+        {
+            const string sql = "SELECT * FROM dbo.Users WHERE UserId = @UserId";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { Email = UserId });
+            }
+        }
+
+        public async Task<User> GetUserByTypeId(int TypeId)
+        {
+            const string sql = "SELECT * FROM dbo.Users WHERE TypeId = @TypeId";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { Email = TypeId });
+            }
+        }
+
+        public async Task<User> GetUserByUserIdAndTypeId(int UserId, int TypeId)
+        {
+            const string sql = "SELECT * FROM dbo.Users WHERE UserId = @UserId and TypeId = @TypeId";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { UserId = UserId, TypeId = TypeId });
+            }
+        }
+
+        public async Task<ExpertUser> GetExpertByUserId(int UserId)
+        {
+            int TypeId = (int)UserType.ExpertUser;
+
+            const string sql = "SELECT * FROM dbo.Users WHERE UserId = @UserId and TypeId = @TypeId";
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QuerySingleOrDefaultAsync<ExpertUser>(sql, new { UserId = UserId, TypeId = TypeId });
             }
         }
 

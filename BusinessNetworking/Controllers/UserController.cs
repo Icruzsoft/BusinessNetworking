@@ -57,6 +57,21 @@ namespace BusinessNetworking.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("GetExpertByUserId")]
+        public async Task<IActionResult> GetExpertByUserId(int UserId)
+        {
+            try
+            {
+                var expert_user = await _userService.GetExpertByUserId(UserId);
+                return Ok(new { User = expert_user });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
     // Puedes necesitar definir un modelo para el proceso de login si no lo has hecho ya
