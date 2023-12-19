@@ -1,11 +1,13 @@
-﻿namespace BusinessNetworking.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BusinessNetworking.Entities
 {
     public class UserType
     {
-        /// <summary>
-        ///  Id 1 = Expert, Id 2 = Client.
-        /// </summary>
-        int UserTypeId {  get; set; }
+        public int UserTypeId { get; set; }
+
+        [Required(ErrorMessage = "El tipo de usuario es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El tipo de usuario debe tener como máximo 50 caracteres.")]
         public string Type { get; set; }
     }
 }

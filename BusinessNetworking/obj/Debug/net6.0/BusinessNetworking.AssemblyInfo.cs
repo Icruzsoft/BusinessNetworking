@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BusinessNetworking")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b40a00e4efb3327c6181eafb1233f79c5cac710c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BusinessNetworking")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BusinessNetworking")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
