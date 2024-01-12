@@ -20,7 +20,7 @@ namespace BusinessNetworking.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] ClientUser user)
         {
             // Asegurarse de que CreatedDate se establezca aquí ya que no se envía desde el cliente
             user.CreatedDate = DateTime.UtcNow;
@@ -57,9 +57,24 @@ namespace BusinessNetworking.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("GetExpertByUserId")]
+        public async Task<IActionResult> GetExpertByUserId(int UserId)
+        {
+            try
+            {
+                var expert_user = await _userService.GetExpertByUserId(UserId);
+                return Ok(new { User = expert_user });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
-    // Puedes necesitar definir un modelo para el proceso de login si no lo has hecho ya
+    
     public class LoginModel
     {
         public string Email { get; set; }

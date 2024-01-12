@@ -10,10 +10,10 @@ namespace BusinessNetworking.DataAccess.Repositories
 
     public interface IUserRepository
     {
-        Task<int> CreateUser(User user);
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<User> GetUserById(int userId);
-        Task<bool> UpdateUser(User user);
+        Task<int> CreateUser(ClientUser user);
+        Task<IEnumerable<ClientUser>> GetAllUsers();
+        Task<ClientUser> GetUserById(int userId);
+        Task<bool> UpdateUser(ClientUser user);
         Task<bool> DeleteUser(int userId);
     }
 
@@ -28,7 +28,7 @@ namespace BusinessNetworking.DataAccess.Repositories
 
         // Resto del código sin cambios...
 
-        public async Task<int> CreateUser(User user)
+        public async Task<int> CreateUser(ClientUser user)
         {
             const string sql = @"INSERT INTO dbo.Client (UserName, Name, LastName, Email, PhoneNumber, [Password], TermsAccepted, CreatedDate)
                             VALUES (@UserName, @Name, @LastName, @Email, @PhoneNumber, @Password, @TermsAccepted, @CreatedDate);
@@ -43,29 +43,29 @@ namespace BusinessNetworking.DataAccess.Repositories
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<ClientUser>> GetAllUsers()
         {
             const string sql = "SELECT * FROM dbo.Client";
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                var users = await connection.QueryAsync<User>(sql);
+                var users = await connection.QueryAsync<ClientUser>(sql);
                 return users;
             }
         }
 
-        public async Task<User> GetUserById(int userId)
+        public async Task<ClientUser> GetUserById(int userId)
         {
             const string sql = "SELECT * FROM dbo.Client WHERE UserId = @UserId";
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                var user = await connection.QueryFirstOrDefaultAsync<User>(sql, new { UserId = userId });
+                var user = await connection.QueryFirstOrDefaultAsync<ClientUser>(sql, new { UserId = userId });
                 return user;
             }
         }
 
-        public async Task<bool> UpdateUser(User user)
+        public async Task<bool> UpdateUser(ClientUser user)
         {
             const string sql = @"UPDATE dbo.Client SET UserName = @UserName, Name = @Name, LastName = @LastName,
                                 Email = @Email, PhoneNumber = @PhoneNumber, [Password] = @Password,

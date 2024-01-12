@@ -5,9 +5,15 @@ namespace BusinessNetworking.Entities
     public class UserType
     {
         public int UserTypeId { get; set; }
-
-        [Required(ErrorMessage = "El tipo de usuario es obligatorio.")]
-        [StringLength(50, ErrorMessage = "El tipo de usuario debe tener como máximo 50 caracteres.")]
-        public string Type { get; set; }
+        public string TypeName { get; set; }
+        public int IdentityIdentity { get; set; }
+        public int IdentitySeed { get; set; }
+        public int IdentityIncrement { get; set; }
+        public List<ClientUser> Clients { get; set; }
+        public List<ExpertUser> Experts { get; set; }
     }
 }
+
+
+
+
